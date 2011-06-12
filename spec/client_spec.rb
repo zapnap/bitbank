@@ -6,20 +6,28 @@ describe "Bitbank::Client" do
   end
 
   describe 'info' do
+    use_vcr_cassette 'client/info'
+
     it 'should return a hash containing bitcoind status information' do
-      VCR.use_cassette('client/info') do
-        @result = @client.info
+      @result = @client.info
 
-        @result['version'].should == 32100
-        @result['testnet'].should be_false
+      @result['version'].should == 32100
+      @result['testnet'].should be_false
 
-        info_keys = ['version', 'balance', 'blocks', 'connections', 'proxy',
-          'generate', 'genproclimit', 'difficulty', 'hashespersec', 'testnet', 
-          'keypoololdest', 'paytxfee', 'errors']
-        info_keys.each do |key|
-          @result.keys.include?(key).should be_true
-        end
+      info_keys = ['version', 'balance', 'blocks', 'connections', 'proxy',
+        'generate', 'genproclimit', 'difficulty', 'hashespersec', 'testnet', 
+        'keypoololdest', 'paytxfee', 'errors']
+      info_keys.each do |key|
+        @result.keys.include?(key).should be_true
       end
+    end
+  end
+
+  describe 'difficulty' do
+    use_vcr_cassette 'client/difficulty'
+
+    it 'should return the current difficulty' do
+      @client.difficulty.should == 567358.22457067
     end
   end
 end

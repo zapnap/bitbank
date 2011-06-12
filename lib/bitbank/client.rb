@@ -10,6 +10,10 @@ module Bitbank
       request('getinfo')
     end
 
+    def difficulty
+      request('getdifficulty')
+    end
+
     private
 
     def request(method, *args)
