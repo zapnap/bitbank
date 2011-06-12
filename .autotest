@@ -1,0 +1,23 @@
+begin
+  require 'autotest/fsevent'
+rescue LoadError
+  puts "NOTE: Install autotest-fsevent to prevent filesystem polling"
+end
+
+begin
+  require 'autotest/growl'
+rescue LoadError
+  puts "NOTE: Install autotest-growl for growl support"
+end
+
+require 'autotest/timestamp'
+
+Autotest.add_hook :initialize do |at|
+  at.add_exception %r{\/\.bundle}
+  at.add_exception %r{\/\.git}
+  at.add_exception %r{\.gitignore}
+  at.add_exception %r{\.rspec}
+  at.add_exception %r{\.rvmrc}
+  at.add_exception %r{\/config}
+  at.add_exception %r{\/coverage}
+end
