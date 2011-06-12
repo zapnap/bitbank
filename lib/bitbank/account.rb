@@ -7,5 +7,13 @@ module Bitbank
       @name = name
       @balance = balance
     end
+
+    def address
+      @client.request('getaccountaddress', name)
+    end
+
+    def balance
+      @client.request('getbalance', name)
+    end
   end
 end

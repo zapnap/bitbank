@@ -26,8 +26,6 @@ module Bitbank
       request('getinfo')
     end
 
-    private
-
     def request(method, *args)
       body = { 'id' => 'jsonrpc', 'method' => method }
       body['params'] = args unless args.empty?

@@ -5,6 +5,23 @@ describe "Bitbank::Client" do
     @client = Bitbank.new(File.join(File.dirname(__FILE__), '..', 'config.yml'))
   end
 
+  describe 'request' do
+    before(:each) do
+      @json = '{"result":{"foo":"bar"}}'
+    end
+
+    it 'should post to the endpoint' do
+      RestClient.expects(:post).with(
+        @client.instance_variable_get('@endpoint'), anything).returns(@json)
+      @client.request('foo')
+    end
+
+    it 'should parse json results' do
+      RestClient.stubs(:post).returns(@json)
+      @client.request('whatever').should == { 'foo' => 'bar' }
+    end
+  end
+
   describe 'accounts' do
     use_vcr_cassette 'client/accounts'
 
@@ -12,7 +29,6 @@ describe "Bitbank::Client" do
       accounts = @client.accounts
       accounts.length.should == 3
       accounts.last.name.should == 'misc'
-      accounts.last.balance.should == 5.0
     end
   end
 
