@@ -5,6 +5,17 @@ describe "Bitbank::Client" do
     @client = Bitbank.new(File.join(File.dirname(__FILE__), '..', 'config.yml'))
   end
 
+  describe 'accounts' do
+    use_vcr_cassette 'client/accounts'
+
+    it 'should retrieve all accounts' do
+      accounts = @client.accounts
+      accounts.length.should == 3
+      accounts.last.name.should == 'misc'
+      accounts.last.balance.should == 5.0
+    end
+  end
+
   describe 'balance' do
     use_vcr_cassette 'client/balance'
 

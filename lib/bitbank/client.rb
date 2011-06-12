@@ -6,6 +6,14 @@ module Bitbank
                   "@#{config[:host]}:#{config[:port]}"
     end
 
+    def accounts
+      accounts = []
+      account_data = request('listaccounts')
+      account_data.map do |account_name, account_value|
+        Account.new(self, account_name, account_value)
+      end
+    end
+
     def balance
       request('getbalance')
     end
