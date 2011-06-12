@@ -15,8 +15,8 @@ Make sure to set the server, rpcuser, and rpcpassword options.
 Configure the username and password to match the ones in your bitcoind config. I recommend storing these in a yaml file (see the example config.yml). Once you've done that, you can initialize the client and make requests:
 
   client = Bitbank.new('/path/to/bitbank/config.yml')
-  client.info
-  # => returns some information about your bitcoind client status
+  client.balance
+  # => 1.05 # your current bitcoin balance
 
 == Contributing to Bitbank
 

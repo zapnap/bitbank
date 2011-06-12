@@ -6,12 +6,16 @@ module Bitbank
                   "@#{config[:host]}:#{config[:port]}"
     end
 
-    def info
-      request('getinfo')
+    def balance
+      request('getbalance')
     end
 
     def difficulty
       request('getdifficulty')
+    end
+
+    def info
+      request('getinfo')
     end
 
     private

@@ -5,6 +5,22 @@ describe "Bitbank::Client" do
     @client = Bitbank.new(File.join(File.dirname(__FILE__), '..', 'config.yml'))
   end
 
+  describe 'balance' do
+    use_vcr_cassette 'client/balance'
+
+    it 'should retreive the current balance' do
+      @client.balance.should == 12.34
+    end
+  end
+
+  describe 'difficulty' do
+    use_vcr_cassette 'client/difficulty'
+
+    it 'should return the current difficulty' do
+      @client.difficulty.should == 567358.22457067
+    end
+  end
+
   describe 'info' do
     use_vcr_cassette 'client/info'
 
@@ -20,14 +36,6 @@ describe "Bitbank::Client" do
       info_keys.each do |key|
         @result.keys.include?(key).should be_true
       end
-    end
-  end
-
-  describe 'difficulty' do
-    use_vcr_cassette 'client/difficulty'
-
-    it 'should return the current difficulty' do
-      @client.difficulty.should == 567358.22457067
     end
   end
 end
