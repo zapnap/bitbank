@@ -28,6 +28,14 @@ module Bitbank
       request('getdifficulty')
     end
 
+    def get_work(data=nil)
+      if data.nil?
+        request('getwork')
+      else
+        request('getwork', data)
+      end
+    end
+
     def info
       request('getinfo')
     end

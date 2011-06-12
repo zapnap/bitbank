@@ -56,6 +56,24 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'get_work' do
+    context 'when data is not supplied' do
+      use_vcr_cassette 'client/get_work'
+
+      it 'should return new formatted hash data to work on' do
+        work = @client.get_work
+        ['midstate', 'data', 'hash1', 'target'].each do |key|
+          work.has_key?(key).should be_true
+        end
+      end
+    end
+
+    context 'when data is supplied' do
+      it 'checks my answer'
+      it 'gives me more work'
+    end
+  end
+
   describe 'info' do
     use_vcr_cassette 'client/info'
 

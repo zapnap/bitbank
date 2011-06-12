@@ -1,0 +1,30 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"getwork"}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '35'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Sun, 12 Jun 2011 21:39:27 +0000
+      content-length:
+      - '600'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":{"midstate":"ace5f7dd75ea5372e40894388064b5be6e78e616bcb0f820fb05cdf730999d4c","data":"00000001c71b0f4c49d00e869ecad1faa0d4bfb758d33d9cc65de51300001c1a000000006546598cf54417fc415bd2c14f452b457423b87f81f33cbc1fc9effb497e69ca4df5320b1a1d932f00000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000","hash1":"00000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000010000","target":"00000000000000000000000000000000000000000000002f931d000000000000"},"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'
