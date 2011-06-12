@@ -40,6 +40,14 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'block_count' do
+    use_vcr_cassette 'client/block_count'
+
+    it 'should return the number of blocks in the longest block chain' do
+      @client.block_count.should == 130361
+    end
+  end
+
   describe 'difficulty' do
     use_vcr_cassette 'client/difficulty'
 

@@ -18,6 +18,12 @@ module Bitbank
       request('getbalance')
     end
 
+    # Returns the number of blocks in the longest block chain.
+    def block_count
+      request('getblockcount')
+    end
+
+    # Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
     def difficulty
       request('getdifficulty')
     end
