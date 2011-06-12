@@ -8,11 +8,11 @@ First, you need to be running bitcoind. Download and install the official client
 
 Next, in order for the client to respond to JSON-RPC commands, you need to enable it in the config file. An example of this and a good explanation of the various options can be found at https://en.bitcoin.it/wiki/Running_Bitcoin
 
-Make sure to set the rpcuser and rpcpassword options.
+Make sure to set the server, rpcuser, and rpcpassword options.
 
 == Connecting
 
-Configure the username and password to match the ones in your bitcoind config. I recommend storing these in a yaml file (see the provided example). Once you've done that, you can initialize the client:
+Configure the username and password to match the ones in your bitcoind config. I recommend storing these in a yaml file (see the example config.yml). Once you've done that, you can initialize the client and make requests:
 
   client = Bitbank.new('/path/to/bitbank/config.yml')
   client.info
