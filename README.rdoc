@@ -2,8 +2,24 @@
 
 An easy-to-use Ruby interface for the Bitcoind JSON-RPC API. Work in progress :).
 
+== Getting Started
+
+First, you need to be running bitcoind. Download and install the official client from http://bitcoin.org/
+
+Next, in order for the client to respond to JSON-RPC commands, you need to enable it in the config file. An example of this and a good explanation of the various options can be found at https://en.bitcoin.it/wiki/Running_Bitcoin
+
+Make sure to set the rpcuser and rpcpassword options.
+
+== Connecting
+
+Configure the username and password to match the ones in your bitcoind config. I recommend storing these in a yaml file (see the provided example). Once you've done that, you can initialize the client:
+
+  client = Bitbank.new('/path/to/bitbank/config.yml')
+  client.info
+  # => returns some information about your bitcoind client status
+
 == Contributing to Bitbank
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
