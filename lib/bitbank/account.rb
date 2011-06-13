@@ -16,8 +16,17 @@ module Bitbank
       @client.balance(name)
     end
 
+    def pay(address, amount)
+      txid = @client.request('sendfrom', name, address, amount)
+      Transaction.new(@client, txid)
+    end
+
     def transactions
       @client.transactions(name)
+    end
+
+    def ==(other)
+      name == other.name
     end
   end
 end

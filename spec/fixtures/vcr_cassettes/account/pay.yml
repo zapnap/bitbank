@@ -1,0 +1,60 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"sendfrom","params":["adent","destinationaddress",0.1]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '107'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Sun, 12 Jun 2011 03:59:59 +0000
+      content-length:
+      - '106'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":"newtxid","error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'
+
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"gettransaction","params":["newtxid"]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '120'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 13 Jun 2011 04:00:01 +0000
+      content-length:
+      - '289'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":{"amount":0.01,"confirmations":1,"txid":"newtxid","time":1307851201,"details":[{"account":"adent","address":"addr1","category":"send","amount":0.1}]},"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'

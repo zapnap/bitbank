@@ -26,6 +26,18 @@ describe "Bitbank::Account" do
     end
   end
 
+  describe 'pay' do
+    use_vcr_cassette 'account/pay'
+
+    it 'should return a new transaction' do
+      transaction = @account.pay('destinationaddress', 0.01)
+      transaction.amount.should == 0.01
+      transaction.account.should == @account
+    end
+
+    it 'should update balances'
+  end
+
   describe 'transactions' do
     use_vcr_cassette 'account/transactions'
 
@@ -34,6 +46,13 @@ describe "Bitbank::Account" do
       transactions.length.should == 1
       transactions.first.is_a?(Bitbank::Transaction).should be_true
       transactions.first.txid.should == 'txid1'
+    end
+  end
+
+  describe 'equality' do
+    it 'should compare account names' do
+      @account.should_not == Bitbank::Account.new(@client, 'prefect')
+      @account.should == Bitbank::Account.new(@client, 'adent')
     end
   end
 end

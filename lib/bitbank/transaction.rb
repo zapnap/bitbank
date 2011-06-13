@@ -21,6 +21,10 @@ module Bitbank
       confirmations && confirmations > 6
     end
 
+    def ==(other)
+      txid == other.txid
+    end
+
     private
 
     def load_details(data={})

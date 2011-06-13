@@ -62,4 +62,12 @@ describe "Bitbank::Transaction" do
       Bitbank::Transaction.new(@client, 'txid2', :confirmations => 5).should_not be_confirmed
     end
   end
+
+  describe 'equality' do
+    it 'should compare transaction ids' do
+      Bitbank::Transaction.any_instance.stubs(:load_details)
+      @transaction.should_not == Bitbank::Transaction.new(@client, 'txid2')
+      @transaction.should == Bitbank::Transaction.new(@client, 'txid1')
+    end
+  end
 end
