@@ -35,8 +35,8 @@ module Bitbank
       request('getinfo')
     end
 
-    def transactions(account_name=nil)
-      transaction_data = request('listtransactions', account_name)
+    def transactions(account_name=nil, count=10)
+      transaction_data = request('listtransactions', account_name, count)
       transaction_data.map do |txdata|
         Transaction.new(self, txdata['txid'], txdata)
       end
