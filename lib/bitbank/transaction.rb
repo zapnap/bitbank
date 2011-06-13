@@ -28,7 +28,8 @@ module Bitbank
     private
 
     def load_details(data={})
-      data = @client.request('gettransaction', txid).symbolize_keys if data.empty?
+      data = @client.request('gettransaction', txid) if data.empty?
+      data.symbolize_keys!
 
       details = ((data.delete(:details) || []).first || {}).symbolize_keys
       @account = data[:account] || details[:account]
