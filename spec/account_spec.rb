@@ -26,6 +26,14 @@ describe "Bitbank::Account" do
     end
   end
 
+  describe 'new_address' do
+    use_vcr_cassette 'account/new_address'
+
+    it 'should create a new address associated with this account and return it' do
+      @account.new_address.should == '15GsE7o3isyQ7ygzh8Cya58oetrGYygdoi'
+    end
+  end
+
   describe 'pay' do
     use_vcr_cassette 'account/pay'
 
@@ -34,8 +42,6 @@ describe "Bitbank::Account" do
       transaction.amount.should == 0.01
       transaction.account.should == @account
     end
-
-    it 'should update balances'
   end
 
   describe 'transactions' do

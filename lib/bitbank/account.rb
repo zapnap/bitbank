@@ -16,6 +16,10 @@ module Bitbank
       @client.balance(name)
     end
 
+    def new_address
+      @client.new_address(name)
+    end
+
     def pay(address, amount)
       txid = @client.request('sendfrom', name, address, amount)
       Transaction.new(@client, txid)

@@ -102,6 +102,14 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'new_address' do
+    use_vcr_cassette 'client/new_address', :record => :new_episodes
+
+    it 'should create a new address and return it' do
+      @client.new_address.should == '1EzxbYD4rFvZBjUEbtnKZ9KJdrqHB7mkZE'
+    end
+  end
+
   describe 'transactions' do
     context 'overall' do
       use_vcr_cassette 'client/transactions'

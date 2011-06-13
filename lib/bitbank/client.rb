@@ -35,6 +35,10 @@ module Bitbank
       request('getinfo')
     end
 
+    def new_address(account_name=nil)
+      request('getnewaddress', account_name)
+    end
+
     def transactions(account_name=nil, count=10)
       transaction_data = request('listtransactions', account_name, count)
       transaction_data.map do |txdata|
@@ -44,7 +48,7 @@ module Bitbank
 
     def request(method, *args)
       body = { 'id' => 'jsonrpc', 'method' => method }
-      body['params'] = args unless args.empty? && !args.first.nil?
+      body['params'] = args unless args.empty? || args.first.nil?
 
       response_json = RestClient.post(@endpoint, body.to_json)
       response = JSON.parse(response_json)
