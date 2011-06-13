@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "bitbank.gemspec",
     "config.yml",
     "lib/bitbank.rb",
     "lib/bitbank/account.rb",
