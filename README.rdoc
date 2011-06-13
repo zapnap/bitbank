@@ -15,8 +15,33 @@ Make sure to set the server, rpcuser, and rpcpassword options.
 Configure the username and password to match the ones in your bitcoind config. I recommend storing these in a yaml file (see the example config.yml). Once you've done that, you can initialize the client and make requests:
 
   client = Bitbank.new('/path/to/bitbank/config.yml')
+
+== Accounts and Account Balances
+
+You can have a number of different Bitcoin accounts and addresses.
+
+  client.accounts.each do |account|
+    puts "#{account.name}: #{account.balance}"
+  end
+
+Or you can get the current balance for all your accounts:
+
   client.balance
-  # => 1.05 # your current bitcoin balance
+  # => 10.05
+
+== Transactions
+
+Each account also has a list of transactions (both sent and received).
+
+  account.transactions.each do |transaction|
+    puts "[#{transaction.category}] #{transaction.address} #{transaction.amount}"
+  end
+
+And of course you can send payments using the library too:
+
+  account.pay('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', 1.0)
+
+This would send 1 BTC to me. Which would be really awesome, if you'd like to support the continued development of the gem :).
 
 == Contributing to Bitbank
 
