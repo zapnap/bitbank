@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "bitbank"
   gem.homepage = "http://github.com/zapnap/bitbank"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Easy to use Ruby interface to the Bitcoind JSON-RPC API}
+  gem.description = %Q{Easy to use Ruby interface to the Bitcoind JSON-RPC API}
   gem.email = "nap@zerosum.org"
   gem.authors = ["Nick Plante"]
   # dependencies defined in Gemfile
