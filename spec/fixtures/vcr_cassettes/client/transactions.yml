@@ -1,0 +1,30 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"listtransactions","params":[]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '56'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 13 Jun 2011 00:28:03 +0000
+      content-length:
+      - '1197'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":[{"account":"adent","address":"addr1","category":"receive","amount":0.02000000,"confirmations":4591,"txid":"txid1","time":1306082334},{"account":"prefect","address":"addr2","category":"receive","amount":0.02000000,"confirmations":4590,"txid":"txid2","time":1306082627},{"account":"prefect","address":"addr3","category":"receive","amount":1.00000000,"confirmations":1992,"txid":"txid3","time":1307126515},{"account":"prefect","address":"addr4","category":"send","amount":-1.00000000,"fee":-0.01000000,"confirmations":1951,"txid":"txid4","time":1307144775}],"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'

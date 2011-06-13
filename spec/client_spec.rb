@@ -33,10 +33,20 @@ describe "Bitbank::Client" do
   end
 
   describe 'balance' do
-    use_vcr_cassette 'client/balance'
+    context 'overall' do
+      use_vcr_cassette 'client/balance'
 
-    it 'should retreive the current balance' do
-      @client.balance.should == 12.34
+      it 'should retreive the current balance' do
+        @client.balance.should == 12.34
+      end
+    end
+
+    context 'scoped to a particular account' do
+      use_vcr_cassette 'client/balance_account'
+
+      it 'should retrieve the account balance' do
+        @client.balance.should == 10.05
+      end
     end
   end
 
@@ -88,6 +98,28 @@ describe "Bitbank::Client" do
         'keypoololdest', 'paytxfee', 'errors']
       info_keys.each do |key|
         @result.keys.include?(key).should be_true
+      end
+    end
+  end
+
+  describe 'transactions' do
+    context 'overall' do
+      use_vcr_cassette 'client/transactions'
+
+      it 'should retrieve all transactions' do
+        transactions = @client.transactions
+        transactions.length.should == 4
+        transactions.last.txid.should == 'txid4'
+      end
+    end
+
+    context 'scoped to a particular account' do
+      use_vcr_cassette 'client/transactions_account'
+
+      it 'should retrieve transactions for the account' do
+        transactions = @client.transactions('adent')
+        transactions.length.should == 1
+        transactions.last.txid.should == 'txid1'
       end
     end
   end

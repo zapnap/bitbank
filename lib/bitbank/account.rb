@@ -13,7 +13,11 @@ module Bitbank
     end
 
     def balance
-      @client.request('getbalance', name)
+      @client.balance(name)
+    end
+
+    def transactions
+      @client.transactions(name)
     end
   end
 end

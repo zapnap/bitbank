@@ -7,15 +7,14 @@ module Bitbank
     end
 
     def accounts
-      accounts = []
       account_data = request('listaccounts')
       account_data.map do |account_name, account_value|
         Account.new(self, account_name, account_value)
       end
     end
 
-    def balance
-      request('getbalance')
+    def balance(account_name=nil)
+      request('getbalance', account_name)
     end
 
     # Returns the number of blocks in the longest block chain.
@@ -29,20 +28,23 @@ module Bitbank
     end
 
     def get_work(data=nil)
-      if data.nil?
-        request('getwork')
-      else
-        request('getwork', data)
-      end
+      request('getwork', data)
     end
 
     def info
       request('getinfo')
     end
 
+    def transactions(account_name=nil)
+      transaction_data = request('listtransactions', account_name)
+      transaction_data.map do |txdata|
+        Transaction.new(self, txdata['txid'], txdata)
+      end
+    end
+
     def request(method, *args)
       body = { 'id' => 'jsonrpc', 'method' => method }
-      body['params'] = args unless args.empty?
+      body['params'] = args unless args.empty? && !args.first.nil?
 
       response_json = RestClient.post(@endpoint, body.to_json)
       response = JSON.parse(response_json)
