@@ -78,9 +78,24 @@ describe "Bitbank::Client" do
       end
     end
 
-    context 'when data is supplied' do
-      it 'checks my answer'
-      it 'gives me more work'
+    context 'with data' do
+      context 'and the block solution is successful' do
+        use_vcr_cassette 'client/get_work_data_true'
+
+        it 'should return true' do
+          data = "00000001aa1d7a0acb6102db122de979b3eef4e2387f61ce0ca68abb00000eba000000006f35688764fa1d99a8f66b02a25399568a3445af4dfa169448282b02b91f70024dfa59f51a13218573b87d00000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000"
+          @client.get_work(data).should be_true
+        end
+      end
+
+      context 'and the block solution is not successful' do
+        use_vcr_cassette 'client/get_work_data_false'
+
+        it 'should return false' do
+          data = "00000001aa1d7a0acb6102db122de979b3eef4e2387f61ce0ca68abb00000eba000000006f35688764fa1d99a8f66b02a25399568a3445af4dfa169448282b02b91f70024dfa59f51a13218573b87d00000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000"
+          @client.get_work(data).should be_false
+        end
+      end
     end
   end
 
