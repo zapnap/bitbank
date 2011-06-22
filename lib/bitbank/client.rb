@@ -31,6 +31,11 @@ module Bitbank
       request('getblocknumber')
     end
 
+    # Returns the number of connections to other nodes.
+    def connection_count
+      request('getconnectioncount')
+    end
+
     # Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
     def difficulty
       request('getdifficulty')

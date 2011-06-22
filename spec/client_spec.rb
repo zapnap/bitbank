@@ -66,6 +66,14 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'connection_count' do
+    use_vcr_cassette 'client/connection_count'
+
+    it 'should return the number of connections to other nodes' do
+      @client.connection_count.should == 8
+    end
+  end
+
   describe 'difficulty' do
     use_vcr_cassette 'client/difficulty'
 
