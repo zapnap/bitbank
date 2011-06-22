@@ -58,6 +58,14 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'block_number' do
+    use_vcr_cassette 'client/block_number'
+
+    it 'should return the block number of the latest block in the longest chain' do
+      @client.block_number.should == 132426
+    end
+  end
+
   describe 'difficulty' do
     use_vcr_cassette 'client/difficulty'
 
