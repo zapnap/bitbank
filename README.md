@@ -1,4 +1,4 @@
-### Bitbank
+# Bitbank
 
 An easy-to-use Ruby interface for the Bitcoind JSON-RPC API. Work in progress :).
 
