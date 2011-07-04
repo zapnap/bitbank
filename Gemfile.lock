@@ -48,7 +48,7 @@ DEPENDENCIES
   autotest (>= 4.4.6)
   bundler (~> 1.0.0)
   fuubar (>= 0.0.5)
-  i18n (>= 0.6.0)
+  i18n (>= 0.5.0)
   jeweler (~> 1.6.2)
   mocha (>= 0.9.12)
   rcov
