@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bitbank}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nick Plante"]
-  s.date = %q{2011-06-20}
+  s.date = %q{2011-07-04}
   s.description = %q{Easy to use Ruby interface to the Bitcoind JSON-RPC API}
   s.email = %q{nap@zerosum.org}
   s.extra_rdoc_files = [
@@ -45,6 +45,8 @@ Gem::Specification.new do |s|
     "spec/fixtures/vcr_cassettes/client/balance.yml",
     "spec/fixtures/vcr_cassettes/client/balance_account.yml",
     "spec/fixtures/vcr_cassettes/client/block_count.yml",
+    "spec/fixtures/vcr_cassettes/client/block_number.yml",
+    "spec/fixtures/vcr_cassettes/client/connection_count.yml",
     "spec/fixtures/vcr_cassettes/client/difficulty.yml",
     "spec/fixtures/vcr_cassettes/client/get_work.yml",
     "spec/fixtures/vcr_cassettes/client/get_work_data_false.yml",
