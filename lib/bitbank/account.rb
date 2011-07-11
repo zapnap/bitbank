@@ -47,8 +47,12 @@ module Bitbank
     # Note that +amount+ is a real and is rounded to 8 decimal places.
     # Returns the transaction if successful.
     def pay(address, amount)
-      txid = @client.request('sendfrom', name, address, amount)
-      Transaction.new(@client, txid)
+      if @client.validate_address(address, true)
+        txid = @client.request('sendfrom', name, address, amount)
+        Transaction.new(@client, txid)
+      else
+        false
+      end
     end
 
     # Returns a list of the most recent transactions for this account.

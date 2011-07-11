@@ -58,12 +58,31 @@ describe "Bitbank::Account" do
   end
 
   describe 'pay' do
-    use_vcr_cassette 'account/pay'
+    context 'when the recipient address is valid' do
+      use_vcr_cassette 'account/pay'
 
-    it 'should return a new transaction' do
-      transaction = @account.pay('destinationaddress', 0.01)
-      transaction.amount.should == 0.01
-      transaction.account.should == @account
+      it 'should return a new transaction' do
+        transaction = @account.pay('15VjRaDX9zpbA8LVnbrCAFzrVzN7ixHNsC', 0.02)
+        transaction.amount.should == -0.02
+        transaction.account.should == @account
+      end
+    end
+
+    context 'when the recipient address is invalid' do
+      use_vcr_cassette 'account/pay_invalid'
+
+      it 'should return false' do
+        @account.pay('invalidaddress', 0.01).should be_false
+      end
+    end
+
+    context 'when the recipient address is a local address' do
+      use_vcr_cassette 'account/pay_local'
+
+      it 'should warn the user and return false' do
+        @client.expects(:warn)
+        @account.pay('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', 0.01).should be_false
+      end
     end
   end
 
