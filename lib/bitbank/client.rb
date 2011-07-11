@@ -84,6 +84,17 @@ module Bitbank
       end
     end
 
+    # Determine if the given address is valid.
+    def validate_address(address, raise_if_local=false)
+      status = request('validateaddress', address)
+
+      if raise_if_local && status['ismine']
+        raise AddressValidationError, "Bitcoin address '#{address}' belongs to local account '#{status['account']}'."
+      end
+
+      status['isvalid']
+    end
+
     def request(method, *args)
       body = { 'id' => 'jsonrpc', 'method' => method }
       body['params'] = args unless args.empty? || args.first.nil?
@@ -93,4 +104,6 @@ module Bitbank
       response['result']
     end
   end
+
+  class AddressValidationError < StandardError; end
 end

@@ -176,4 +176,32 @@ describe "Bitbank::Client" do
       end
     end
   end
+
+  describe 'validate_address' do
+    context 'with an invalid address' do
+      use_vcr_cassette 'client/validate_address_invalid'
+
+      it 'should be false' do
+        @client.validate_address('heartofgold').should be_false
+      end
+    end
+
+    context 'with a valid address' do
+      use_vcr_cassette 'client/validate_address_valid'
+
+      it 'should be true' do
+        @client.validate_address('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB').should be_true
+      end
+    end
+
+    context 'when local address are not desired' do
+      use_vcr_cassette 'client/validate_address_nolocal'
+
+      it 'should raise an errored' do
+        expect {
+          @client.validate_address('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', true)
+        }.to raise_error(Bitbank::AddressValidationError)
+      end
+    end
+  end
 end
