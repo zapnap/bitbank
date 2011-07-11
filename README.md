@@ -22,7 +22,7 @@ You can have a number of different Bitcoin accounts and addresses.
 
     account = client.new_account('named-account')
 
-    account = client.account('named-account')
+    account = client.account('named-account') # or account_by_address
     puts "#{account.name} has bitcoin address #{account.address}"
 
     client.accounts.each do |account|

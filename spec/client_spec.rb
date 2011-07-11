@@ -29,6 +29,29 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'account_by_address' do
+    before(:each) do
+      Bitbank::Account.any_instance.stubs(:address).returns(true) # check
+    end
+
+    context 'when the address exists locally' do
+      use_vcr_cassette 'client/address_by_account'
+
+      it 'should retrieve the appropriate account' do
+        account = @client.account_by_address('16FEfkbJHEXnEhZbuNGyFaoCYgVyUtqX6j')
+        account.should == Bitbank::Account.new(@client, 'adent')
+      end
+    end
+
+    context 'when the address does not exist locally' do
+      use_vcr_cassette 'client/address_by_account_not_found'
+
+      it 'should return false' do
+        @client.account_by_address('badaddress').should be_nil
+      end
+    end
+  end
+
   describe 'accounts' do
     use_vcr_cassette 'client/accounts'
 

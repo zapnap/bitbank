@@ -1,3 +1,9 @@
+### 0.1.2 / 2011-07-12
+
+* Added address validation mechanism to client
+* Guard against sending payments to invalid addresses
+* Added ability to retrieve accounts by address
+
 ### 0.1.1 / 2011-07-11
 
 * Added direct account lookup

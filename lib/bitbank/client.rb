@@ -7,8 +7,19 @@ module Bitbank
     end
 
     # Retrieve a particular named account.
-    def account(name)
-      Bitbank::Account.new(self, name, nil, true)
+    def account(account_name)
+      Bitbank::Account.new(self, account_name, nil, true)
+    end
+
+    # Rerieve the account that the given Bitcoin address belongs to.
+    # Returns nil if the account
+    def account_by_address(address)
+      account_name = request('getaccount', address)
+      if account_name.present?
+        account(account_name)
+      else
+        nil
+      end
     end
 
     # Returns a list of local accounts.

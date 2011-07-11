@@ -14,7 +14,7 @@ describe "Bitbank::Account" do
     use_vcr_cassette 'account/address'
 
     it 'should retrieve the address for this account' do
-      @account.address.should == '1NqwGDRi9Gs4xm1BmPnGeMwgz1CowP6CeQ'
+      @account.address.should == '16FEfkbJHEXnEhZbuNGyFaoCYgVyUtqX6j'
     end
 
     it 'should be validated on account creation if a check was requested (default)' do
