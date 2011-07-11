@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bitbank}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nick Plante"]
@@ -41,8 +41,12 @@ Gem::Specification.new do |s|
     "spec/fixtures/vcr_cassettes/account/move.yml",
     "spec/fixtures/vcr_cassettes/account/new_address.yml",
     "spec/fixtures/vcr_cassettes/account/pay.yml",
+    "spec/fixtures/vcr_cassettes/account/pay_invalid.yml",
+    "spec/fixtures/vcr_cassettes/account/pay_local.yml",
     "spec/fixtures/vcr_cassettes/account/transactions.yml",
     "spec/fixtures/vcr_cassettes/client/accounts.yml",
+    "spec/fixtures/vcr_cassettes/client/address_by_account.yml",
+    "spec/fixtures/vcr_cassettes/client/address_by_account_not_found.yml",
     "spec/fixtures/vcr_cassettes/client/balance.yml",
     "spec/fixtures/vcr_cassettes/client/balance_account.yml",
     "spec/fixtures/vcr_cassettes/client/block_count.yml",
@@ -56,6 +60,9 @@ Gem::Specification.new do |s|
     "spec/fixtures/vcr_cassettes/client/new_address.yml",
     "spec/fixtures/vcr_cassettes/client/transactions.yml",
     "spec/fixtures/vcr_cassettes/client/transactions_account.yml",
+    "spec/fixtures/vcr_cassettes/client/validate_address_invalid.yml",
+    "spec/fixtures/vcr_cassettes/client/validate_address_nolocal.yml",
+    "spec/fixtures/vcr_cassettes/client/validate_address_valid.yml",
     "spec/fixtures/vcr_cassettes/transaction/details.yml",
     "spec/spec_helper.rb",
     "spec/support/focused.rb",
