@@ -1,0 +1,59 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"move","params":["adent","prefect",0.01]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '66'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 11 Jul 2011 14:40:40 +0000
+      content-length:
+      - '44'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":true,"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"getbalance","params":["prefect"]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '59'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 11 Jul 2011 14:40:40 +0000
+      content-length:
+      - '50'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":0.01000000,"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'

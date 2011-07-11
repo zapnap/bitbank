@@ -22,6 +22,13 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'account' do
+    it 'should retrieve a named account' do
+      Bitbank::Account.any_instance.expects(:address).returns(true) # check
+      @client.account('newaccount').should == Bitbank::Account.new(@client, 'newaccount')
+    end
+  end
+
   describe 'accounts' do
     use_vcr_cassette 'client/accounts'
 
@@ -133,8 +140,15 @@ describe "Bitbank::Client" do
     end
   end
 
+  describe 'new_account' do
+    it 'should create a new account and a new address' do
+      Bitbank::Account.any_instance.expects(:address).returns(true) # check
+      @client.new_account('newname').should == Bitbank::Account.new(@client, 'newname')
+    end
+  end
+
   describe 'new_address' do
-    use_vcr_cassette 'client/new_address', :record => :new_episodes
+    use_vcr_cassette 'client/new_address'
 
     it 'should create a new address and return it' do
       @client.new_address.should == '1EzxbYD4rFvZBjUEbtnKZ9KJdrqHB7mkZE'

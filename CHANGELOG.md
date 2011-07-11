@@ -1,3 +1,8 @@
+### Edge
+
+* Added direct account lookup
+* Added ability to move / transfer funds between accounts
+
 ### 0.1.0 / 2011-07-04
 
 * get_work specifications added

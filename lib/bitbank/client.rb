@@ -6,15 +6,21 @@ module Bitbank
                   "@#{config[:host]}:#{config[:port]}"
     end
 
+    # Retrieve a particular named account.
+    def account(name)
+      Bitbank::Account.new(self, name, nil, true)
+    end
+
     # Returns a list of local accounts.
     def accounts
       account_data = request('listaccounts')
       account_data.map do |account_name, account_value|
-        Account.new(self, account_name, account_value)
+        Account.new(self, account_name, account_value, false)
       end
     end
 
-    # If an account is not specified, returns the server's total available balance.
+    # If an account is not specified, returns the server's total available
+    # balance.
     #
     # If an account is specified, returns the balance in the account.
     def balance(account_name=nil)
@@ -36,15 +42,16 @@ module Bitbank
       request('getconnectioncount')
     end
 
-    # Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+    # Returns the proof-of-work difficulty as a multiple of the minimum
+    # difficulty.
     def difficulty
       request('getdifficulty')
     end
 
     # If data is not specified, returns formatted hash data to work on.
     #
-    # If data is specified, bitcoind will try to solve the block and will return
-    # true or false indicating whether or not it was successful.
+    # If data is specified, bitcoind will try to solve the block and will
+    # return true or false indicating whether or not it was successful.
     def get_work(data=nil)
       request('getwork', data)
     end
@@ -54,10 +61,17 @@ module Bitbank
       request('getinfo')
     end
 
+    # Returns a new bitcoin account for receiving payments (along with a new
+    # address).
+    def new_account(name)
+      account(name)
+    end
+
     # Returns a new bitcoin address for receiving payments.
     #
     # If an account is specified (recommended), the new address is added to the
-    # address book so payments received with the address are credited to the account.
+    # address book so payments received with the address are credited to the
+    # account.
     def new_address(account_name=nil)
       request('getnewaddress', account_name)
     end

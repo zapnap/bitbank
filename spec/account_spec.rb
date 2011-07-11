@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Bitbank::Account" do
   before(:each) do
     @client = Bitbank.new(File.join(File.dirname(__FILE__), '..', 'config.yml'))
-    @account = Bitbank::Account.new(@client, 'adent', 0.02)
+    @account = Bitbank::Account.new(@client, 'adent')
   end
 
   it 'should have a name' do
@@ -16,6 +16,11 @@ describe "Bitbank::Account" do
     it 'should retrieve the address for this account' do
       @account.address.should == '1NqwGDRi9Gs4xm1BmPnGeMwgz1CowP6CeQ'
     end
+
+    it 'should be validated on account creation if a check was requested (default)' do
+      Bitbank::Account.any_instance.expects(:address)
+      Bitbank::Account.new(@client, 'trill', nil, true)
+    end
   end
 
   describe 'balance' do
@@ -23,6 +28,24 @@ describe "Bitbank::Account" do
 
     it 'should retrieve the current balance' do
       @account.balance.should == 0.02
+    end
+  end
+
+  describe 'move' do
+    use_vcr_cassette 'account/move'
+
+    before(:each) do
+      @to_account = Bitbank::Account.new(@client, 'prefect')
+    end
+
+    it 'should move funds between accounts using an account name' do
+      @account.move('prefect', 0.01).should be_true
+      @to_account.balance.should == 0.01
+    end
+
+    it 'should move funds between accounts using an account object' do
+      @account.move(@to_account, 0.01).should be_true
+      @to_account.balance.should == 0.01
     end
   end
 
