@@ -197,10 +197,8 @@ describe "Bitbank::Client" do
     context 'when local address are not desired' do
       use_vcr_cassette 'client/validate_address_nolocal'
 
-      it 'should raise an errored' do
-        expect {
-          @client.validate_address('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', true)
-        }.to raise_error(Bitbank::AddressValidationError)
+      it 'should be false and generate a warning' do
+        @client.validate_address('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', true).should be_false
       end
     end
   end
