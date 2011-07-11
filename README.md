@@ -20,6 +20,11 @@ Configure the username and password to match the ones in your bitcoind config. I
 
 You can have a number of different Bitcoin accounts and addresses.
 
+    account = client.new_account('named-account')
+
+    account = client.account('named-account')
+    puts "#{account.name} has bitcoin address #{account.address}"
+
     client.accounts.each do |account|
       puts "#{account.name}: #{account.balance}"
     end
@@ -36,6 +41,10 @@ Each account also has a list of transactions (both sent and received).
     account.transactions.each do |transaction|
       puts "[#{transaction.category}] #{transaction.address} #{transaction.amount}"
     end
+
+You can move money between your accounts:
+
+    account.move('another-account', 0.5)
 
 And of course you can send payments using the library too:
 
