@@ -1,4 +1,4 @@
-### Edge
+### 0.1.1 / 2011-07-11
 
 * Added direct account lookup
 * Added ability to move / transfer funds between accounts
