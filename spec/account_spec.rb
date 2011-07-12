@@ -23,6 +23,16 @@ describe "Bitbank::Account" do
     end
   end
 
+  describe 'addresses' do
+    use_vcr_cassette 'account/addresses'
+
+    it 'should retrieve a list of all addresses for this account' do
+      addresses = @account.addresses
+      addresses.should include('16FEfkbJHEXnEhZbuNGyFaoCYgVyUtqX6j')
+      addresses.should include('15GsE7o3isyQ7ygzh8Cya58oetrGYygdoi')
+    end
+  end
+
   describe 'balance' do
     use_vcr_cassette 'account/balance'
 

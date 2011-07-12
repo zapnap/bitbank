@@ -18,6 +18,13 @@ module Bitbank
       @client.request('getaccountaddress', name)
     end
 
+    alias :primary_address :address
+
+    # Returns the complete list of addresses for this account.
+    def addresses
+      @client.request('getaddressesbyaccount', name)
+    end
+
     # Returns the balance in this account.
     def balance
       @client.balance(name)

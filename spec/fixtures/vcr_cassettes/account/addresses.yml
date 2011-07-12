@@ -1,0 +1,30 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://testuser:testpass@localhost:8332/
+    body: ! '{"id":"jsonrpc","method":"getaddressesbyaccount","params":["adent"]}'
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      content-length:
+      - '68'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Tue, 12 Jul 2011 15:54:12 +0000
+      content-length:
+      - '115'
+      content-type:
+      - application/json
+      server:
+      - bitcoin-json-rpc/0.3.21-beta
+    body: ! '{"result":["15GsE7o3isyQ7ygzh8Cya58oetrGYygdoi","16FEfkbJHEXnEhZbuNGyFaoCYgVyUtqX6j"],"error":null,"id":"jsonrpc"}
+
+'
+    http_version: '1.1'

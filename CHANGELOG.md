@@ -1,3 +1,7 @@
+### EDGE
+
+* Added ability to fetch all addresses for a given account
+
 ### 0.1.2 / 2011-07-12
 
 * Added address validation mechanism to client
