@@ -48,7 +48,7 @@ You can move money between your accounts:
 
 And of course you can send payments using the library too:
 
-    account.pay('1DSwyVqyhKKQwrdFw3jpAEqnrXEjTcTKMB', 1.0)
+    account.pay('134rUPDEWP8Qp7sShm5bpvmpPtR2mfAeAV', 1.0)
 
 This would send 1 BTC to me. Which would be really awesome, if you'd like to support the continued development of the gem :).
 
@@ -64,6 +64,6 @@ This would send 1 BTC to me. Which would be really awesome, if you'd like to sup
 
 ## Copyright
 
-Copyright (c) 2011 Nick Plante. See LICENSE.txt for
+Copyright (c) 2013 Nick Plante. See LICENSE.txt for
 further details.
 
